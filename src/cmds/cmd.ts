@@ -6,8 +6,8 @@ import { Options } from 'src/types/command.types';
 const git: SimpleGit = gitP(path.resolve(__dirname, '..', '..', 'test'));
 
 export default function (action: Function) {
-  return async (options: Options, command: Command) => {
-    const result: Result<any> = await action.apply(this, [git, options, command])
+  return async (args: string, options: Options) => {
+    const result: Result<any> = await action.apply(this, [git, args, options || {}])
 
     if (result.isOk()) {
       const output = result.getValue();

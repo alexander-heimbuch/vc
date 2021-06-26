@@ -9,15 +9,15 @@ import stage from '../git/stage';
 
 const { Input } = require('enquirer');
 
-const commitMessage = (message: string[]): Promise<Result<string>> => {
+const commitMessage = (message: string[]): Promise<string> => {
   return new Input({
     message: 'Commit message:',
     initial: message.join('\n'),
     multiline: true
-  }).run().then(result => Result.ofValue(result));
+  }).run();
 }
 
-export default async function (git: SimpleGit, options: Options, command: Command) {
+export default async function (git: SimpleGit, args: string, options: Options): Promise<Result<string>> {
   const files = await spinner(git.status(), 'getting staged files').then(({ staged }) => staged).then(stage(git));
 
   let initialMessage;
@@ -52,7 +52,7 @@ export default async function (git: SimpleGit, options: Options, command: Comman
   }
 
   const message = await commitMessage(initialMessage);
-  await spinner(git.commit(message.getValue(), files.getValue(), commitOptions), 'Commiting staged files');
+  await spinner(git.commit(message, files, commitOptions), 'Commiting staged files');
 
   return FILES_COMMITED(files);
 }

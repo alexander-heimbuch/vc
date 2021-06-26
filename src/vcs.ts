@@ -8,6 +8,7 @@ import command from './cmds/cmd';
 import stage from './cmds/stage';
 import commit from './cmds/commit';
 import branch from './cmds/branch';
+import history from './cmds/history';
 
 import { collect } from "./io/options";
 
@@ -33,6 +34,16 @@ cli
   .option('-r, --remote <remoteBranch>', 'remote branch')
   .action(command(branch));
 
+cli
+  .command('history [file]')
+  .description('show the git history')
+  .option('-h, --commit <hash>', 'commit hash')
+  .option('-q, --query <query>', 'commit text/body query')
+  .option('-c, --count <count>', 'amount of commits to show', '50')
+  .option('-a, --author <author>', 'commit author')
+  .option('-s, --since <since>', 'commits since date')
+  .option('-b, --before <before>', 'commits before date')
+  .action(command(history))
 
 // error on unknown commands
 cli.on("command:*", function () {

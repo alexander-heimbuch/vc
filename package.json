@@ -16,7 +16,9 @@
     "enquirer": "2.3.6",
     "execa": "^5.1.1",
     "ora": "5.4.0",
-    "simple-git": "2.39.0"
+    "simple-git": "2.39.0",
+    "date-fns": "2.22.1",
+    "human-interval": "1.0.0"
   },
   "devDependencies": {
     "ts-node": "10.0.0",

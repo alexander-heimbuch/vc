@@ -4,7 +4,7 @@ import { FILES_STAGE } from '../io/messages';
 import stage from '../git/stage';
 import { Options } from 'src/types/command.types';
 
-export default async function (git: SimpleGit, options: Options,  command: Command) {
+export default async function (git: SimpleGit, command: Command, options: Options) {
   const files = command.args;
   return stage(git)(files).then(FILES_STAGE);
 }
