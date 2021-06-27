@@ -14,11 +14,10 @@ const formatter = (history) =>
     message: HISTORY_ENTRY(history.latest, entry),
   }));
 
-const getCommit = async (git: SimpleGit, options: Options) => {
+const getCommit = async (git: SimpleGit, options: Options, args: string) => {
   if (options.commit) {
     return Promise.resolve(options.commit);
   }
-
 
   const logOptions = condList(
     '-p',
@@ -54,6 +53,10 @@ const getCommit = async (git: SimpleGit, options: Options) => {
     {
       value: `--grep=${options.query}`,
       cond: !!options.query
+    },
+    {
+      value: args,
+      cond: !!args
     }
   );
 
@@ -78,7 +81,7 @@ const getCommit = async (git: SimpleGit, options: Options) => {
 
 export default async function (git: SimpleGit, args: string, options: Options): Promise<Result<any>> {
   try {
-    const commit = await getCommit(git, options);
+    const commit = await getCommit(git, options, args);
     const status = await git.show(['--stat', `--pretty=${STATUS_FORMAT}`, commit]);
 
     return Result.ofValue(status);

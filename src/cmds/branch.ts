@@ -5,19 +5,23 @@ import execa from 'execa';
 import spinner from '../io/spinner';
 import { Options } from '../types/command.types';
 import { CHECKOUT_BRANCH, SWITCH_BRANCH } from '../io/messages';
-const { AutoComplete, Input, Confirm } = require('enquirer');
+const { Confirm } = require('enquirer');
+import { AutoSuggest } from '../io/auto-suggest';
 
-const isValidBranchName = (branch: string) => execa('git', ['check-ref-format', branch]).then(() => true).catch(() => false)
+const isValidBranchName = (branch: string) => execa('git', ['check-ref-format', '--allow-onelevel', branch]).then(() => true).catch(() => false)
 
-const branchName = async (input: string): Promise<string> => {
-  if (input && isValidBranchName(input)) {
-    return Promise.resolve(input);
+const branchName = async (branches: string[], branch: string): Promise<string> => {
+  if (branch && isValidBranchName(branch)) {
+    return Promise.resolve(branch);
   }
 
-  const prompt = new Input({
+  const prompt = new AutoSuggest({
     name: 'branch',
-    message: 'Branch name',
-    validate: isValidBranchName
+    message: 'branch',
+    limit: 10,
+    validate: isValidBranchName,
+    inputNoChoice: true,
+    choices: ['', ...branches]
   });
 
   return prompt.run();
@@ -42,8 +46,7 @@ const stashChanges = async (git: SimpleGit): Promise<void> => {
     return Promise.reject(`You have unsaved changes, cant switch branch`)
   }
 
-  const stashResult = await spinner(git.stash(), 'stashing changes')
-  console.log(stashResult)
+  await spinner(git.stash(), 'stashing changes')
 }
 
 const remoteBranch = async (branches: string[], remote: string): Promise<string> => {
@@ -51,10 +54,12 @@ const remoteBranch = async (branches: string[], remote: string): Promise<string>
     return Promise.resolve(remote);
   }
 
-  const prompt = new AutoComplete({
+  const prompt = new AutoSuggest({
     name: 'remote',
     message: 'remote',
     limit: 10,
+    validate: isValidBranchName,
+    inputNoChoice: true,
     choices: ['', ...branches],
   });
 
@@ -67,7 +72,7 @@ export default async function (git: SimpleGit, args: string, options: Options): 
     await spinner(git.fetch(), 'fetching remotes');
     const branchList = await spinner(git.branch(), 'fetching branches').then(({ all }) => all.map((branch) => branch.replace('remotes/', '')));
 
-    const branch = await branchName(args);
+    const branch = await branchName(branchList, args);
 
     if (branchList.includes(branch)) {
       await spinner(git.checkout([branch]), `switching to branch ${branch}`);
