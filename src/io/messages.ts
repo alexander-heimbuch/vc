@@ -83,3 +83,9 @@ ${chalk.bold('%s')}
 %b`
 
 export const HISTORY_EMPTY = () => `${chalk.red('⨯')} No entries found`;
+
+export const PUSH_SUCCESSFULL = (branch: string, remote: string) => `${chalk.green('✓')} Pushed ${chalk.bold(branch)} → ${chalk.bold(remote)}`;
+export const PUSH_FAILED = (err: string) => `${chalk.red('⨯')} Push failed
+
+${err}
+`;

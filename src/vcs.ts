@@ -9,6 +9,7 @@ import stage from './cmds/stage';
 import commit from './cmds/commit';
 import branch from './cmds/branch';
 import history from './cmds/history';
+import push from './cmds/push';
 
 import { collect } from "./io/options";
 
@@ -44,6 +45,11 @@ cli
   .option('-s, --since <since>', 'commits since date')
   .option('-b, --before <before>', 'commits before date')
   .action(command(history))
+
+cli
+  .command('push [remote] [branch]')
+  .description('push changes to a remote')
+  .action(command(push))
 
 // error on unknown commands
 cli.on("command:*", function () {
