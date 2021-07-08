@@ -1,2 +1,4 @@
 test/
-node_modules
+dist/
+bundle/
+node_modules/

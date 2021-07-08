@@ -1,4 +1,3 @@
-import { Result } from '@nozzlegear/railway';
 import { SimpleGit } from 'simple-git/promise';
 import spinner from '../io/spinner';
 import { FILE_SELECT } from '../io/messages'

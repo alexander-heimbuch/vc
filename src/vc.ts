@@ -10,6 +10,7 @@ import commit from './cmds/commit';
 import branch from './cmds/branch';
 import history from './cmds/history';
 import push from './cmds/push';
+import merge from './cmds/merge';
 
 import { collect } from "./io/options";
 
@@ -50,6 +51,10 @@ cli
   .command('push [remote] [branch]')
   .description('push changes to a remote')
   .action(command(push))
+
+cli
+  .command('merge <branch>')
+  .action(command(merge))
 
 // error on unknown commands
 cli.on("command:*", function () {

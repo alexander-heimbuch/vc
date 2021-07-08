@@ -89,3 +89,8 @@ export const PUSH_FAILED = (err: string) => `${chalk.red('⨯')} Push failed
 
 ${err}
 `;
+
+export const MERGE_SUCCESSFULL = (current: string, destination: string) => `${chalk.green('✓')} Merged ${chalk.bold(destination)} → ${chalk.bold(current)}`;
+
+export const STASH_CHANGES = () => `${chalk.green('✓')} Stashed current changes`;
+export const APPLY_CHANGES = (branch: string) => `${chalk.green('✓')} Applied stashed changes to branch ${chalk.bold(branch)}`;

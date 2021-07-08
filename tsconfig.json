@@ -19,10 +19,9 @@
       "src/**/*"
     ],
     "files": [
-      "src/vcs.ts"
+      "src/vc.ts"
     ],
     "exclude": [
       "node_modules"
     ]
   }
-  
