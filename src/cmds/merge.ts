@@ -7,7 +7,6 @@ import { stashChanges } from '../git/stash';
 import { selectBranch, branchList } from '../git/branch';
 import spinner from '../io/spinner';
 import { MERGE_SUCCESSFULL, APPLY_CHANGES } from '../io/messages';
-import { saveMergeStash } from '../helper/db';
 
 export default async function (git: SimpleGit, args: string, options: Options): Promise<Result<any>> {
   const currentBranch = await spinner(git.status().then(({ current }) => current), 'get current branch');
@@ -39,12 +38,6 @@ export default async function (git: SimpleGit, args: string, options: Options): 
 
     return Result.ofValue(MERGE_SUCCESSFULL(currentBranch, branch))
   } catch (err) {
-    const runningMerge = await mergeHead();
-
-    if (runningMerge && stash) {
-      await saveMergeStash(runningMerge, stash)
-    }
-
     return Result.ofError(err)
   }
 }

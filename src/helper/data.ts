@@ -8,7 +8,7 @@ export const condList = (...args: listElement[]): any[] =>
       return result;
     }
 
-    if (typeof el.cond === 'function' && el.cond() || el.cond) {
+    if ((typeof el.cond === 'function' && el.cond()) || (typeof el.cond !== 'function' && el.cond)) {
       result.push(typeof el.value === 'function' ? el.value() : el.value);
     }
 
