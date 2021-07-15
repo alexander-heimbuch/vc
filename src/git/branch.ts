@@ -11,15 +11,15 @@ export const isValidBranchName = (branch: string) =>
 export const selectBranch = async (
   name: string,
   branches: string[],
-  { fallback, initial }: { fallback?: string; initial?: string }
+  options?: { fallback?: string; initial?: string }
 ): Promise<string> => {
-  if (fallback && isValidBranchName(fallback)) {
-    return Promise.resolve(fallback);
+  if (options && options.fallback && await isValidBranchName(options.fallback)) {
+    return Promise.resolve(options.fallback);
   }
 
   const prompt = new AutoSuggest({
     name,
-    initial,
+    initial:options ? options.initial : null,
     message: name,
     limit: 10,
     validate: isValidBranchName,
