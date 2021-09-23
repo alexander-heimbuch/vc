@@ -7,9 +7,10 @@ interface TestEnv { dir: DirectoryResult, git: SimpleGit }
 interface TestFile { path: string, content: string }
 
 export async function init(): Promise<TestEnv> {
-  const dir = await tmp.dir();
+  const dir = await tmp.dir({ unsafeCleanup: true });
   const git: SimpleGit = gitP(dir.path);
 
+  await git.init();
   await git.addConfig('user.name', 'Integration Test')
   await git.addConfig('user.mail', 'integration@test')
 

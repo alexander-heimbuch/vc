@@ -4,7 +4,7 @@
   "description": "A git cli for humans",
   "scripts": {
     "test": "jest",
-    "start": "env TEST_DIR='./test' ts-node src/vc.ts",
+    "start": "env GIT_DIR='./test' ts-node src/vc.ts",
     "clean": "rm -rf dist/ bundle/",
     "compile": "tsc --build tsconfig.json",
     "build": "run-s clean compile",
@@ -36,6 +36,7 @@
     "ts-jest": "27.0.3",
     "jest": "27.0.6",
     "@types/jest": "26.0.24",
-    "tmp-promise": "3.0.2"
+    "tmp-promise": "3.0.2",
+    "concat-stream": "2.0.0"
   }
 }
