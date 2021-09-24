@@ -7,18 +7,23 @@ const git: SimpleGit = process.env.VC_GIT_DIR ? gitP(path.resolve(process.env.VC
 
 export default function (action: Function) {
   return async (args: string, options: Options) => {
-    const result: Result<any> = await action.apply(this, [git, args, options || {}]);
+    try {
+      const result: Result<any> = await action.apply(this, [git, args, options || {}]);
 
-    if (result.isOk()) {
-      const output = result.getValue();
-      output && console.log(output);
-      return process.exit(0);
-    }
+      if (result.isOk()) {
+        const output = result.getValue();
+        output && console.log(output);
+        return process.exit(0);
+      }
 
-    if (result.isError()) {
-      const error = result.getError();
-      console.log(error);
+      if (result.isError()) {
+        const error = result.getError();
+        console.log(error);
+        process.exit(1);
+      }
+    } catch (err) {
+      console.log(err);
       process.exit(1);
     }
-  };
+  }
 }

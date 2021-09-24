@@ -1,6 +1,6 @@
 import { Result } from '@nozzlegear/railway';
-import { Command } from 'commander';
 import { SimpleGit } from 'simple-git/promise';
+import { propOr } from 'ramda';
 
 import spinner from '../io/spinner';
 import { Options } from '../types/command.types';
@@ -25,7 +25,7 @@ export default async function (git: SimpleGit, args: string, options: Options): 
   let initialMessage;
 
   switch (true) {
-    case options.message.length > 0: {
+    case propOr([], 'messages', options).length > 0: {
       initialMessage = options.message;
       break;
     }
