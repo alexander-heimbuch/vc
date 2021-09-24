@@ -25,5 +25,5 @@ export default function (action: Function) {
       console.log(err);
       process.exit(1);
     }
-  }
+  };
 }
