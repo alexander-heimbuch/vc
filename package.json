@@ -1,6 +1,6 @@
 {
   "name": "vc",
-  "version": "0.0.1",
+  "version": "0.0.1-beta.1",
   "description": "A git cli for humans",
   "main": "./dist/src/vc.js",
   "scripts": {
