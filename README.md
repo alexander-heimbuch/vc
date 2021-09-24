@@ -1,7 +1,7 @@
 # VC
 > A git cli for humans that is pleasent and humble
 
-![Demo](./assets/demo.svg)
+![Demo](./assets/demo.gif)
 
 ## Motivation 💡
 
