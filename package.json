@@ -1,7 +1,8 @@
 {
   "name": "vc",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A git cli for humans",
+  "main": "./dist/src/vc.js",
   "scripts": {
     "test": "jest",
     "start": "env VC_GIT_DIR='./test' ts-node src/vc.ts",
@@ -9,7 +10,10 @@
     "compile": "tsc --build tsconfig.json",
     "build": "run-s clean compile",
     "package": "pkg dist/vc.js --config package.json --options max_old_space_size=4096 --targets node14-macos-x64,node14-linux-x64 --out-path bundle/",
-    "bundle": "run-s build package"
+    "bundle": "run-s build package",
+    "lint": "prettier --check ./src",
+    "fix": "prettier --write ./src",
+    "release": "release-it"
   },
   "keywords": [],
   "author": "Alexander Heimbuch <github@heimbu.ch>",
@@ -38,6 +42,38 @@
     "jest": "27.0.6",
     "@types/jest": "26.0.24",
     "tmp-promise": "3.0.2",
-    "concat-stream": "2.0.0"
+    "concat-stream": "2.0.0",
+    "prettier": "2.4.1",
+    "husky": "7.0.2",
+    "pretty-quick": "3.1.1",
+    "release-it": "14.11.6"
+  },
+  "bin": {
+    "vc": "./dist/vc.js"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true,
+      "assets": [
+        "bundle/**"
+      ]
+    },
+    "npm": {
+      "publish": false
+    },
+    "hooks": {
+      "before:init": "npm run lint",
+      "after:bump": [
+        "npm run bundle"
+      ]
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

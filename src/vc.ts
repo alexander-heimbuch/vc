@@ -50,6 +50,7 @@ cli
 cli
   .command('push [remote] [branch]')
   .description('push changes to a remote')
+  .option('-f, --force', 'force push changes with lease', false)
   .action(command(push))
 
 cli

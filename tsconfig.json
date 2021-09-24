@@ -6,7 +6,6 @@
       "target": "es6",
       "noImplicitAny": false,
       "moduleResolution": "node",
-      "jsx": "react",
       "sourceMap": true,
       "outDir": "dist",
       "baseUrl": ".",
@@ -15,9 +14,6 @@
         "./typings"
       ]
     },
-    "include": [
-      "src/**/*"
-    ],
     "files": [
       "src/vc.ts"
     ],

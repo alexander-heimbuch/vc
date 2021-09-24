@@ -8,6 +8,7 @@ import { Options } from '../types/command.types';
 
 export default async function (git: SimpleGit, remote: string, options: Options): Promise<Result<any>> {
   let branch = options.branch;
+  const force = options.force ? ['--force-with-lease'] : [];
 
   try {
     const { tracking, current } = await git.status();
@@ -30,9 +31,9 @@ export default async function (git: SimpleGit, remote: string, options: Options)
 
     // new branch
     if (!branchList.includes(branchName)) {
-      await git.push(['--set-upstream', remoteName, branchName]);
+      await git.push([...force, '--set-upstream', remoteName, branchName]);
     } else {
-      await git.push([remoteName, branchName]);
+      await git.push([...force, remoteName, branchName]);
     }
 
     return Result.ofValue(PUSH_SUCCESSFULL(current, `${remoteName}/${branchName}`));
