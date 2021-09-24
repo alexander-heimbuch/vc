@@ -1,6 +1,8 @@
 # VC
 > A git cli for humans that is pleasent and humble
 
+![Demo](./assets/demo.svg)
+
 ## Motivation 💡
 
 Git is one of the tools that fundamentally influences a developers way to work. It is a key enabler for collaboration, to automate code integration processes or just as a simple safety net while plow through your code base. The backbone of modern development is build on a remarkable cli tool that enabled ecosystems like GitHub or GitLab to rise. 
