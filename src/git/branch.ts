@@ -13,13 +13,13 @@ export const selectBranch = async (
   branches: string[],
   options?: { fallback?: string; initial?: string }
 ): Promise<string> => {
-  if (options && options.fallback && await isValidBranchName(options.fallback)) {
+  if (options && options.fallback && (await isValidBranchName(options.fallback))) {
     return Promise.resolve(options.fallback);
   }
 
   const prompt = new AutoSuggest({
     name,
-    initial:options ? options.initial : null,
+    initial: options ? options.initial : null,
     message: name,
     limit: 10,
     validate: isValidBranchName,
@@ -33,4 +33,4 @@ export const selectBranch = async (
 export const branchList = async (git: SimpleGit) => {
   const fetch = git.fetch().then(() => git.branch());
   return spinner(fetch, 'fetching branches').then(({ all }) => all.map((branch) => branch.replace('remotes/', '')));
-}
+};

@@ -1,8 +1,8 @@
 #! /usr/bin/env node
-"use strict";
+'use strict';
 
-import cli from "commander";
-const { version } = require("../package");
+import cli from 'commander';
+const { version } = require('../package');
 
 import command from './cmds/cmd';
 import stage from './cmds/stage';
@@ -12,16 +12,11 @@ import history from './cmds/history';
 import push from './cmds/push';
 import merge from './cmds/merge';
 
-import { collect } from "./io/options";
+import { collect } from './io/options';
 
-cli
-  .version(version, "-v --version", "output the current version")
-  .description("user focused version control");
+cli.version(version, '-v --version', 'output the current version').description('user focused version control');
 
-cli
-  .command('stage')
-  .description('stage files for commit')
-  .action(command(stage));
+cli.command('stage').description('stage files for commit').action(command(stage));
 
 cli
   .command('commit')
@@ -45,24 +40,19 @@ cli
   .option('-a, --author <author>', 'commit author')
   .option('-s, --since <since>', 'commits since date')
   .option('-b, --before <before>', 'commits before date')
-  .action(command(history))
+  .action(command(history));
 
 cli
   .command('push [remote] [branch]')
   .description('push changes to a remote')
   .option('-f, --force', 'force push changes with lease', false)
-  .action(command(push))
+  .action(command(push));
 
-cli
-  .command('merge [branch]')
-  .action(command(merge))
+cli.command('merge [branch]').action(command(merge));
 
 // error on unknown commands
-cli.on("command:*", function () {
-  console.error(
-    "invalid command: %s\nSee --help for a list of available commands.",
-    cli.args.join(" ")
-  );
+cli.on('command:*', function () {
+  console.error('invalid command: %s\nSee --help for a list of available commands.', cli.args.join(' '));
   process.exit(1);
 });
 

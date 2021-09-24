@@ -31,10 +31,10 @@ const getCommit = async (git: SimpleGit, options: Options, args: string) => {
         const relative = humnanInterval(options.since);
 
         if (relative) {
-          return `--since=${new Date(Date.now() - relative).toUTCString()}`
+          return `--since=${new Date(Date.now() - relative).toUTCString()}`;
         }
 
-        return `--since=${options.since}`
+        return `--since=${options.since}`;
       },
       cond: !!options.since,
     },
@@ -43,20 +43,20 @@ const getCommit = async (git: SimpleGit, options: Options, args: string) => {
         const relative = humnanInterval(options.before);
 
         if (relative) {
-          return `--before=${new Date(Date.now() - relative).toUTCString()}`
+          return `--before=${new Date(Date.now() - relative).toUTCString()}`;
         }
 
-        return `--before=${options.before}`
+        return `--before=${options.before}`;
       },
       cond: !!options.before,
     },
     {
       value: `--grep=${options.query}`,
-      cond: !!options.query
+      cond: !!options.query,
     },
     {
       value: args,
-      cond: !!args
+      cond: !!args,
     }
   );
 
@@ -86,6 +86,6 @@ export default async function (git: SimpleGit, args: string, options: Options): 
 
     return Result.ofValue(status);
   } catch (err) {
-    return Result.ofError(HISTORY_EMPTY())
+    return Result.ofError(HISTORY_EMPTY());
   }
 }

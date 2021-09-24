@@ -1,6 +1,6 @@
 import { SimpleGit } from 'simple-git/promise';
 import spinner from '../io/spinner';
-import { FILE_SELECT } from '../io/messages'
+import { FILE_SELECT } from '../io/messages';
 
 const { AutoComplete } = require('enquirer');
 
@@ -21,7 +21,7 @@ export const select = async (git: SimpleGit): Promise<string[]> => {
       .map((file) => ({
         message: FILE_SELECT(status, file).getValue(),
         value: file,
-        name: file
+        name: file,
       })),
   });
 
@@ -38,5 +38,4 @@ export const add = (git: SimpleGit) => async (files: string[]) => {
   return status.staged;
 };
 
-export default (git: SimpleGit) => (files: string[]) =>
-  (files.length > 0 ? Promise.resolve(files) : select(git)).then(add(git));
+export default (git: SimpleGit) => (files: string[]) => (files.length > 0 ? Promise.resolve(files) : select(git)).then(add(git));

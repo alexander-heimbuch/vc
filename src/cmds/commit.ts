@@ -2,7 +2,7 @@ import { Result } from '@nozzlegear/railway';
 import { Command } from 'commander';
 import { SimpleGit } from 'simple-git/promise';
 
-import spinner from '../io/spinner'
+import spinner from '../io/spinner';
 import { Options } from '../types/command.types';
 import { FILES_COMMITED } from '../io/messages';
 import stage from '../git/stage';
@@ -13,12 +13,14 @@ const commitMessage = (message: string[]): Promise<string> => {
   return new Input({
     message: 'Commit message:',
     initial: message.join('\n'),
-    multiline: true
+    multiline: true,
   }).run();
-}
+};
 
 export default async function (git: SimpleGit, args: string, options: Options): Promise<Result<string>> {
-  const files = await spinner(git.status(), 'getting staged files').then(({ staged }) => staged).then(stage(git));
+  const files = await spinner(git.status(), 'getting staged files')
+    .then(({ staged }) => staged)
+    .then(stage(git));
 
   let initialMessage;
 
@@ -42,7 +44,7 @@ export default async function (git: SimpleGit, args: string, options: Options): 
   let commitOptions;
   switch (true) {
     case !!options.amend: {
-      commitOptions = '--amend'
+      commitOptions = '--amend';
       break;
     }
 

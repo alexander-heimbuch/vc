@@ -7,7 +7,6 @@ import { CHECKOUT_BRANCH, SWITCH_BRANCH } from '../io/messages';
 import { selectBranch, branchList } from '../git/branch';
 import { stashChanges } from '../git/stash';
 
-
 export default async function (git: SimpleGit, args: string, options: Options): Promise<Result<any>> {
   try {
     await stashChanges(git);

@@ -27,7 +27,11 @@ export default async function (git: SimpleGit, args: string, options: Options): 
 
     const branches = await branchList(git);
 
-    const branch = await selectBranch('branch', branches.filter(branch => branch !== currentBranch), { fallback: args });
+    const branch = await selectBranch(
+      'branch',
+      branches.filter((branch) => branch !== currentBranch),
+      { fallback: args }
+    );
 
     if (!branches.includes(branch) || branch === currentBranch) {
       return Result.ofError(NO_VALID_BRANCH_SELECTED());
@@ -37,12 +41,12 @@ export default async function (git: SimpleGit, args: string, options: Options): 
 
     if (stash) {
       // TODO: reapply stash
-      await spinner(git.stash(['pop']), `applying stash ${stash}`)
+      await spinner(git.stash(['pop']), `applying stash ${stash}`);
       console.log(APPLY_CHANGES(currentBranch));
     }
 
     return Result.ofValue(MERGE_SUCCESSFULL(currentBranch, branch));
   } catch (err) {
-    return Result.ofError(err)
+    return Result.ofError(err);
   }
 }

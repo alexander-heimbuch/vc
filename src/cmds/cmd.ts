@@ -7,7 +7,7 @@ const git: SimpleGit = process.env.VC_GIT_DIR ? gitP(path.resolve(process.env.VC
 
 export default function (action: Function) {
   return async (args: string, options: Options) => {
-    const result: Result<any> = await action.apply(this, [git, args, options || {}])
+    const result: Result<any> = await action.apply(this, [git, args, options || {}]);
 
     if (result.isOk()) {
       const output = result.getValue();

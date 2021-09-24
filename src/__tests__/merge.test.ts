@@ -24,8 +24,8 @@ describe('merge', () => {
     const result = await vc.execute(
       ['merge'], // args
       [], // inputs
-      { env: { VC_GIT_DIR: testRepo.dir.path } }, // options
-    )
+      { env: { VC_GIT_DIR: testRepo.dir.path } } // options
+    );
 
     expect(result).toContain('main');
     expect(result).toContain('test-branch-1');
@@ -44,8 +44,8 @@ describe('merge', () => {
     await vc.execute(
       ['merge'], // args
       ['target-branch', cmd.ENTER], // inputs
-      { env: { VC_GIT_DIR: testRepo.dir.path } }, // options
-    )
+      { env: { VC_GIT_DIR: testRepo.dir.path } } // options
+    );
 
     const result = await testRepo.git.log();
     expect(result.latest.message).toEqual('test commit');
@@ -64,7 +64,7 @@ describe('merge', () => {
     await vc.execute(
       ['merge', 'target-branch'], // args
       ['Y'], // inputs
-      { env: { VC_GIT_DIR: testRepo.dir.path } }, // options
+      { env: { VC_GIT_DIR: testRepo.dir.path } } // options
     );
 
     const status = await testRepo.git.status();
@@ -84,10 +84,10 @@ describe('merge', () => {
     await testRepo.git.merge(['target-branch']).catch(() => {});
 
     const result = await vc.execute(
-        ['merge', 'target-branch'], // args
-        [], // inputs
-        { env: { VC_GIT_DIR: testRepo.dir.path } }, // options
-      );
+      ['merge', 'target-branch'], // args
+      [], // inputs
+      { env: { VC_GIT_DIR: testRepo.dir.path } } // options
+    );
 
     expect(result).toContain('Merge in progress');
   });
@@ -96,7 +96,7 @@ describe('merge', () => {
     const result = await vc.execute(
       ['merge', 'target-branch'], // args
       [], // inputs
-      { env: { VC_GIT_DIR: testRepo.dir.path } }, // options
+      { env: { VC_GIT_DIR: testRepo.dir.path } } // options
     );
 
     expect(result).toContain('No valid branch selected');

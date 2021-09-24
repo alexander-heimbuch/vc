@@ -1,4 +1,4 @@
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { format, formatDistance, formatRelative, subDays } from 'date-fns';
 import chalk from 'chalk';
 import { Result } from '@nozzlegear/railway';
 import { StatusResult } from 'simple-git/promise';
@@ -15,7 +15,7 @@ export const FILES_STAGE = (input: string[]) => {
   }
 
   return Result.ofValue(`Nothing staged`);
-}
+};
 
 export const FILES_COMMITED = (input: string[]): Result<string> => {
   const files = input;
@@ -29,7 +29,7 @@ export const FILES_COMMITED = (input: string[]): Result<string> => {
   }
 
   return Result.ofValue(`No changes commited`);
-}
+};
 
 export const FILE_SELECT = (status: StatusResult, input: string): Result<string> => {
   const { created, modified, deleted, renamed, not_added } = status;
@@ -47,18 +47,18 @@ export const FILE_SELECT = (status: StatusResult, input: string): Result<string>
     return Result.ofValue(chalk.red(file));
   }
 
-  const renamedFile = renamed.find(renamedFile => renamedFile.to === file);
+  const renamedFile = renamed.find((renamedFile) => renamedFile.to === file);
 
   if (renamedFile) {
     return Result.ofValue(chalk.italic(`${renamedFile.from} ➡ ${renamedFile.to}`));
   }
 
   return Result.ofValue(input);
-}
+};
 
 export const SWITCH_BRANCH = (branch: string) => {
   return Result.ofValue(`${chalk.green('✓')} Switchted to branch ${chalk.bold(branch)}`);
-}
+};
 
 export const CHECKOUT_BRANCH = (branch: string, remote?: string) => {
   if (remote) {
@@ -66,31 +66,34 @@ export const CHECKOUT_BRANCH = (branch: string, remote?: string) => {
   }
 
   return Result.ofValue(`${chalk.green('✓')} Checked out branch ${chalk.bold(branch)}`);
-}
+};
 
-export const HISTORY_ENTRY = (latest: any, entry: any) => [
-`${chalk.cyan(entry.hash.substring(0, 7))} - ${entry.message}`,
-`${chalk.green('(' + formatDistance(new Date(entry.date), new Date()) + ')')}`,
-...(entry.diff ? [`[${chalk.green('+' + entry.diff.insertions)} ${chalk.red('-' + entry.diff.deletions)}]`] : []),
-...(entry.hash === latest.hash ? [chalk.yellow(`<${latest.refs}>`)] : [])
-].join(' ');
+export const HISTORY_ENTRY = (latest: any, entry: any) =>
+  [
+    `${chalk.cyan(entry.hash.substring(0, 7))} - ${entry.message}`,
+    `${chalk.green('(' + formatDistance(new Date(entry.date), new Date()) + ')')}`,
+    ...(entry.diff ? [`[${chalk.green('+' + entry.diff.insertions)} ${chalk.red('-' + entry.diff.deletions)}]`] : []),
+    ...(entry.hash === latest.hash ? [chalk.yellow(`<${latest.refs}>`)] : []),
+  ].join(' ');
 
 export const STATUS_FORMAT = `
 ${chalk.magenta('%an <%ae>')}
 ${chalk.green('%ar')} ${chalk.dim('(%aD)')}
 
 ${chalk.bold('%s')}
-%b`
+%b`;
 
 export const HISTORY_EMPTY = () => `${chalk.red('⨯')} No entries found`;
 
-export const PUSH_SUCCESSFULL = (branch: string, remote: string) => `${chalk.green('✓')} Pushed ${chalk.bold(branch)} → ${chalk.bold(remote)}`;
+export const PUSH_SUCCESSFULL = (branch: string, remote: string) =>
+  `${chalk.green('✓')} Pushed ${chalk.bold(branch)} → ${chalk.bold(remote)}`;
 export const PUSH_FAILED = (err: string) => `${chalk.red('⨯')} Push failed
 
 ${err}
 `;
 
-export const MERGE_SUCCESSFULL = (current: string, destination: string) => `${chalk.green('✓')} Merged ${chalk.bold(destination)} → ${chalk.bold(current)}`;
+export const MERGE_SUCCESSFULL = (current: string, destination: string) =>
+  `${chalk.green('✓')} Merged ${chalk.bold(destination)} → ${chalk.bold(current)}`;
 export const NO_CURRENT_BRANCH = () => `${chalk.red('⨯')} You are currently not on a branch`;
 export const NO_VALID_BRANCH_SELECTED = () => `${chalk.red('⨯')} No valid branch selected`;
 export const MERGE_IN_PROGRESS = () => `${chalk.yellow('⚠️')}  Merge in progress: please resolve existing merge conflicts before continue`;
