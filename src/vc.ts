@@ -14,7 +14,7 @@ import merge from './cmds/merge';
 
 import { collect } from './io/options';
 
-cli.version(version, '-v --version', 'output the current version').description('user focused version control');
+cli.version(version, '-v --version', 'output the current version').description('A git cli for humans');
 
 cli.command('stage').description('stage files for commit').action(command(stage));
 
