@@ -5,6 +5,6 @@ import stage from '../git/stage';
 import { Options } from 'src/types/command.types';
 
 export default async function (git: SimpleGit, command: Command, options: Options) {
-  const files = command.args;
-  return stage(git)(files).then(FILES_STAGE);
+  const files = command.args || [];
+  return stage(git, files).then(FILES_STAGE);
 }

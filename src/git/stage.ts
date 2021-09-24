@@ -1,4 +1,5 @@
 import { SimpleGit } from 'simple-git/promise';
+import { curry } from 'ramda';
 import spinner from '../io/spinner';
 import { FILE_SELECT } from '../io/messages';
 
@@ -38,4 +39,4 @@ export const add = (git: SimpleGit) => async (files: string[]) => {
   return status.staged;
 };
 
-export default (git: SimpleGit) => (files: string[]) => (files.length > 0 ? Promise.resolve(files) : select(git)).then(add(git));
+export default curry((git: SimpleGit, files: string[]) => (files.length > 0 ? Promise.resolve(files) : select(git)).then(add(git)));
