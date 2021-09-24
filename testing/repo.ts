@@ -10,11 +10,22 @@ export async function init(): Promise<TestEnv> {
   const dir = await tmp.dir({ unsafeCleanup: true });
   const git: SimpleGit = gitP(dir.path);
 
-  await git.init();
+  await git.init(['-b', 'main']);
   await git.addConfig('user.name', 'Integration Test')
   await git.addConfig('user.mail', 'integration@test')
 
-  return { dir, git }
+  const testEnv = { dir, git }
+
+  await file(testEnv, {
+    path: 'README.md',
+    content: `
+      # TEST REPO
+    `
+  })
+
+  await commit(testEnv, 'initial commit')
+
+  return { dir, git };
 }
 
 export async function file(env: TestEnv, file: TestFile): Promise<TestEnv> {
@@ -33,7 +44,13 @@ export async function commit(env: TestEnv, message: string): Promise<TestEnv> {
 }
 
 export async function branch(env: TestEnv, branchName: string): Promise<TestEnv> {
-  await env.git.checkout(['-b', branchName]);
+  const branches = await (await env.git.branch());
+
+  if (branches.all.some(branch => branch === branchName)) {
+    await env.git.checkout([branchName]);
+  } else {
+    await env.git.checkout(['-b', branchName]);
+  }
 
   return env;
 }

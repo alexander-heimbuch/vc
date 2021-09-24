@@ -53,7 +53,7 @@ cli
   .action(command(push))
 
 cli
-  .command('merge <branch>')
+  .command('merge [branch]')
   .action(command(merge))
 
 // error on unknown commands

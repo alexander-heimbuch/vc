@@ -91,6 +91,8 @@ ${err}
 `;
 
 export const MERGE_SUCCESSFULL = (current: string, destination: string) => `${chalk.green('✓')} Merged ${chalk.bold(destination)} → ${chalk.bold(current)}`;
-
+export const NO_CURRENT_BRANCH = () => `${chalk.red('⨯')} You are currently not on a branch`;
+export const NO_VALID_BRANCH_SELECTED = () => `${chalk.red('⨯')} No valid branch selected`;
+export const MERGE_IN_PROGRESS = () => `${chalk.yellow('⨯')} Merge in progress: please resolve existing merge conflicts before continue`;
 export const STASH_CHANGES = () => `${chalk.green('✓')} Stashed current changes`;
 export const APPLY_CHANGES = (branch: string) => `${chalk.green('✓')} Applied stashed changes to branch ${chalk.bold(branch)}`;

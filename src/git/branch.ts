@@ -30,5 +30,7 @@ export const selectBranch = async (
   return prompt.run().catch(() => null);
 };
 
-export const branchList = async (git: SimpleGit) =>
-  spinner(git.branch(), 'fetching branches').then(({ all }) => all.map((branch) => branch.replace('remotes/', '')));
+export const branchList = async (git: SimpleGit) => {
+  const fetch = git.fetch().then(() => git.branch());
+  return spinner(fetch, 'fetching branches').then(({ all }) => all.map((branch) => branch.replace('remotes/', '')));
+}

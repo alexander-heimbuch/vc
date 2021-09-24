@@ -4,7 +4,7 @@
   "description": "A git cli for humans",
   "scripts": {
     "test": "jest",
-    "start": "env GIT_DIR='./test' ts-node src/vc.ts",
+    "start": "env VC_GIT_DIR='./test' ts-node src/vc.ts",
     "clean": "rm -rf dist/ bundle/",
     "compile": "tsc --build tsconfig.json",
     "build": "run-s clean compile",
@@ -25,7 +25,8 @@
     "date-fns": "2.22.1",
     "human-interval": "1.0.0",
     "fs-extra": "10.0.0",
-    "conf": "10.0.1"
+    "conf": "10.0.1",
+    "ramda": "0.27.1"
   },
   "devDependencies": {
     "ts-node": "10.0.0",
