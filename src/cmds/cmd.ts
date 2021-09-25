@@ -1,9 +1,9 @@
 import { Result } from '@nozzlegear/railway';
-import path from 'path';
 import gitP, { SimpleGit } from 'simple-git/promise';
-import { Options } from 'src/types/command.types';
+import { Options } from '../types/command.types';
+import { workingDir } from '../helper/env';
 
-const git: SimpleGit = process.env.VC_GIT_DIR ? gitP(path.resolve(process.env.VC_GIT_DIR)) : gitP();
+const git: SimpleGit = gitP(workingDir);
 
 export default function (action: Function) {
   return async (args: string, options: Options) => {

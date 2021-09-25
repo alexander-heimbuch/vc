@@ -1,8 +1,9 @@
 import { exists, readFile } from 'fs-extra';
 import { resolve } from 'path';
+import { workingDir } from '../helper/env';
 
 export const mergeHead = async () => {
-  const file = process.env.VC_GIT_DIR ? resolve(process.env.VC_GIT_DIR, '.git', 'MERGE_HEAD') : resolve('.git', 'MERGE_HEAD');
+  const file = resolve(workingDir, '.git', 'MERGE_HEAD');
 
   if (!(await exists(file))) {
     return null;
