@@ -3,10 +3,25 @@
 
 ![Demo](./assets/demo.gif)
 
-## Motivation 💡
+## Usage
+```sh
+Usage: vc [options] [command]
 
-Git is one of the tools that fundamentally influences a developers way to work. It is a key enabler for collaboration, to automate code integration processes or just as a simple safety net while plow through your code base. The backbone of modern development is build on a remarkable cli tool that enabled ecosystems like GitHub or GitLab to rise. 
-On a personal level I've always struggled with the git cli. The git version control model itself already introduces a challenge for beginners and is surpassed by the plenty of options the git cli provides. You might already stumbled upon [discussions](https://news.ycombinator.com/item?id=12621955) if the cli is good or bad and in what way it violates [cli design patterns](https://clig.dev/). However like most of you I also have [some aliases](https://stevelosh.com/blog/2013/04/git-koans/) available to simplify my daily doing. But from time to time I wished for a helping hand to support me in staging commits, switching branches or looking at the git history. VC is my approach to encapsulate best practices and covering human intentions to simplify version control.
+A git cli for humans
+
+Options:
+  -v --version                      output the current version
+  -h, --help                        display help for command
+
+Commands:
+  stage                             stage files for commit
+  commit [options]                  commit file
+  branch [options] [name]           checkout a branch
+  history [options] [file]          show the git history
+  push [options] [remote] [branch]  push changes to a remote
+  merge [branch]
+  help [command]                    display help for command
+```
 
 ## Installation 👩‍🔧
 
@@ -31,7 +46,12 @@ curl -L (curl -s -L https://api.github.com/repos/alexander-heimbuch/vc/releases/
 vc --version
 ```
 
-### Bugs and Issues 🐛
+## Motivation 💡
+
+Git is one of the tools that fundamentally influences a developers way to work. It is a key enabler for collaboration, to automate code integration processes or just as a simple safety net while plow through your code base. The backbone of modern development is build on a remarkable cli tool that enabled ecosystems like GitHub or GitLab to rise. 
+On a personal level I've always struggled with the git cli. The git version control model itself already introduces a challenge for beginners and is surpassed by the plenty of options the git cli provides. You might already stumbled upon [discussions](https://news.ycombinator.com/item?id=12621955) if the cli is good or bad and in what way it violates [cli design patterns](https://clig.dev/). However like most of you I also have [some aliases](https://stevelosh.com/blog/2013/04/git-koans/) available to simplify my daily doing. But from time to time I wished for a helping hand to support me in staging commits, switching branches or looking at the git history. VC is my approach to encapsulate best practices and covering human intentions to simplify version control.
+
+## Bugs and Issues 🐛
 
 If you encounter any bugs or issues feel free to create an [issue](https://github.com/alexander-heimbuch/vc/issues). Please make sure to search for already resolved issues or related discussions 😇.
 
