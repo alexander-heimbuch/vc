@@ -31,13 +31,13 @@ One binary, zero runtime dependencies.
 #### OSX
 
 ```sh
-curl -L (curl -s -L https://api.github.com/repos/alexander-heimbuch/vc/releases/latest | grep -o -E "https://(.*)vc(.*)vc-macos") --output /usr/local/bin/vc
+curl -L $(curl -s -L https://api.github.com/repos/alexander-heimbuch/vc/releases/latest | grep -o -E "https://(.*)vc(.*)vc-macos") --output /usr/local/bin/vc && chmod +x /usr/local/bin/vc
 ```
 
 #### Linux
 
 ```sh
-curl -L (curl -s -L https://api.github.com/repos/alexander-heimbuch/vc/releases/latest | grep -o -E "https://(.*)vc(.*)vc-linux") --output /usr/local/bin/vc
+sudo curl -L $(curl -s -L https://api.github.com/repos/alexander-heimbuch/vc/releases/latest | grep -o -E "https://(.*)vc(.*)vc-linux") --output /usr/local/bin/vc && chmod +x /usr/local/bin/vc
 ```
 
 ### Verify the installation
