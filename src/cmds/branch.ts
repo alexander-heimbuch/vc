@@ -12,8 +12,8 @@ export default async function (git: SimpleGit, args: string, options: Options): 
   await spinner(git.fetch(), 'fetching remotes');
   const branches = await branchList(git);
 
-  const localBranches = branches.filter(branch => !branch.startsWith('remote'));
-  const remoteBranches = branches.filter(branch => branch.startsWith('remote')).map((branch) => branch.replace('remotes/', ''));
+  const localBranches = branches.filter((branch) => !branch.startsWith('remote'));
+  const remoteBranches = branches.filter((branch) => branch.startsWith('remote')).map((branch) => branch.replace('remotes/', ''));
 
   const branch = await selectBranch('branch', localBranches, { fallback: args });
 
