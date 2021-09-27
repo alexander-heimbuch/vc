@@ -1,5 +1,6 @@
 import execa from 'execa';
 import { SimpleGit } from 'simple-git';
+import { identity } from 'ramda';
 import spinner from '../io/spinner';
 import { AutoSuggest } from '../io/auto-suggest';
 
@@ -32,5 +33,5 @@ export const selectBranch = async (
 
 export const branchList = async (git: SimpleGit) => {
   const fetch = git.fetch().then(() => git.branch());
-  return spinner(fetch, 'fetching branches').then(({ all }) => all.map((branch) => branch.replace('remotes/', '')));
+  return spinner(fetch, 'fetching branches').then(({ all }) => all);
 };

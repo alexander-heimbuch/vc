@@ -25,7 +25,7 @@ export default async function (git: SimpleGit, args: string, options: Options): 
 
     stash = await stashChanges(git);
 
-    const branches = await branchList(git);
+    const branches = await branchList(git).then((branchList) => branchList.map(branch => branch.replace('remotes/', '')));
 
     const branch = await selectBranch(
       'branch',
