@@ -149,5 +149,42 @@ export const create = () => ({
 
 export const DOWN = '\x1B\x5B\x42';
 export const UP = '\x1B\x5B\x41';
+export const RIGHT = '\x1b\x5b\x43';
+export const LEFT = '\x1b\x5b\x44';
 export const ENTER = '\x0D';
 export const SPACE = '\x20';
+export const TAB = '\x09';
+
+// # Here are the various escape sequences we can capture
+// # '\x0d': 'return'
+// # '\x7f': 'backspace'
+// # '\x1b': 'escape'
+// # '\x01': 'ctrl+a'
+// # '\x02': 'ctrl+b'
+// # '\x03': 'ctrl+c'
+// # '\x04': 'ctrl+d'
+// # '\x05': 'ctrl+e'
+// # '\x06': 'ctrl+f'
+// # '\x1a': 'ctrl+z'
+// # '\x1b\x4f\x50': 'f1'
+// # '\x1b\x4f\x51': 'f2'
+// # '\x1b\x4f\x52': 'f3'
+// # '\x1b\x4f\x53': 'f4'
+// # '\x1b\x4f\x31\x35\x7e': 'f5'
+// # '\x1b\x4f\x31\x37\x7e': 'f6'
+// # '\x1b\x4f\x31\x38\x7e': 'f7'
+// # '\x1b\x4f\x31\x39\x7e': 'f8'
+// # '\x1b\x4f\x31\x30\x7e': 'f9'
+// # '\x1b\x4f\x31\x31\x7e': 'f10'
+// # '\x1b\x4f\x31\x33\x7e': 'f11'
+// # '\x1b\x4f\x31\x34\x7e': 'f12'
+// # '\x1b\x5b\x41': 'up'
+// # '\x1b\x5b\x42': 'down'
+// # '\x1b\x5b\x43': 'right'
+// # '\x1b\x5b\x44': 'left'
+// # '\x1b\x4f\x46': 'end'
+// # '\x1b\x4f\x48': 'home'
+// # '\x1b\x5b\x32\x7e': 'insert'
+// # '\x1b\x5b\x33\x7e': 'delete'
+// # '\x1b\x5b\x35\x7e': 'pageup'
+// # '\x1b\x5b\x36\x7e': 'pagedown'

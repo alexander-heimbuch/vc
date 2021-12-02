@@ -58,7 +58,12 @@ If you encounter any bugs or issues feel free to create an [issue](https://githu
 ## Contribution 📢.
 VC is in a very early version and needs your feedback, so please join the [discussion](https://github.com/alexander-heimbuch/vc/discussions)! This cli should be a community effort. The more intel we get around what annoys you with git the better vc will get. If you have an idea or want to contribute on an RFC feel free to add your opinion to the discussion.
 
+## Related cli tools
+- https://github.com/jesseduffield/lazygit
+
 ## Inspirations & Resources 🔖
 - https://www.npmjs.com/package/simple-git
 - https://medium.com/@zorrodg/integration-tests-on-node-js-cli-part-1-why-and-how-fa5b1ba552fe
 - https://coderwall.com/p/euwpig/a-better-git-log
+- https://gitexplorer.com
+

@@ -1,8 +1,8 @@
 import execa from 'execa';
 import { SimpleGit } from 'simple-git';
-import { identity } from 'ramda';
 import spinner from '../io/spinner';
 import { AutoSuggest } from '../io/auto-suggest';
+import { fetch } from '../git/fetch'
 
 export const isValidBranchName = (branch: string) =>
   execa('git', ['check-ref-format', '--allow-onelevel', branch])
@@ -32,6 +32,8 @@ export const selectBranch = async (
 };
 
 export const branchList = async (git: SimpleGit) => {
-  const fetch = git.fetch().then(() => git.branch());
-  return spinner(fetch, 'fetching branches').then(({ all }) => all);
+  return spinner(
+    fetch(git).then(() => git.branch()),
+    'fetching branches'
+  ).then(({ all }) => all);
 };
