@@ -6,10 +6,11 @@ import { Options } from '../types/command.types';
 import { CHECKOUT_BRANCH, SWITCH_BRANCH } from '../io/messages';
 import { selectBranch, branchList } from '../git/branch';
 import { stashChanges } from '../git/stash';
+import { fetch } from '../git/fetch';
 
 export default async function (git: SimpleGit, args: string, options: Options): Promise<Result<any>> {
   await stashChanges(git);
-  await spinner(git.fetch(), 'fetching remotes');
+  await spinner(fetch(git), 'fetching remotes');
   const branches = await branchList(git);
 
   const localBranches = branches.filter((branch) => !branch.startsWith('remote'));
