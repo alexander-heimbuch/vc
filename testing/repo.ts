@@ -1,11 +1,11 @@
 import path from 'path';
 import { ensureFile, writeFile } from 'fs-extra';
-import gitP, { SimpleGit } from 'simple-git/promise';
+import gitP, { SimpleGit, StatusResult } from 'simple-git/promise';
 import tmp, { DirectoryResult } from 'tmp-promise';
 import { DefaultLogFields, LogResult } from 'simple-git';
 
-interface TestEnv { dir: DirectoryResult, git: SimpleGit }
-interface TestFile { path: string, content: string }
+export interface TestEnv { dir: DirectoryResult, git: SimpleGit }
+export interface TestFile { path: string, content: string }
 
 export async function init(): Promise<TestEnv> {
   const dir = await tmp.dir({ unsafeCleanup: true });
@@ -64,4 +64,12 @@ export async function add(env: TestEnv, files: string | string[]): Promise<TestE
 
 export async function history(env: TestEnv): Promise<LogResult<DefaultLogFields>> {
   return await env.git.log()
+}
+
+export async function status(env: TestEnv): Promise<StatusResult> {
+  return await env.git.status()
+}
+
+export async function addRemote(env: TestEnv, name: string, remote: TestEnv): Promise<void> {
+  await env.git.addRemote(name, remote.dir.path)
 }

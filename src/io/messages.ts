@@ -101,3 +101,4 @@ export const NO_VALID_BRANCH_SELECTED = () => `${chalk.red('⨯')} No valid bran
 export const MERGE_IN_PROGRESS = () => `${chalk.yellow('⚠️')}  Merge in progress: please resolve existing merge conflicts before continue`;
 export const STASH_CHANGES = () => `${chalk.green('✓')} Stashed current changes`;
 export const APPLY_CHANGES = (branch: string) => `${chalk.green('✓')} Applied stashed changes to branch ${chalk.bold(branch)}`;
+export const NO_BRANCH_SELECTED = () => Result.ofValue(`No branch selected`);
