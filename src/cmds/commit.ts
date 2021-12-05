@@ -24,7 +24,7 @@ export default async function (git: SimpleGit, options: Options, args: Options):
 
   let initialMessage;
 
-  const commitMessage = propOr([], 'message', options).join('\n')
+  const commitMessage = propOr([], 'message', options).join('\n');
 
   switch (true) {
     case options.amend: {
@@ -38,7 +38,7 @@ export default async function (git: SimpleGit, options: Options, args: Options):
     }
   }
 
-  const commitOptions = { };
+  const commitOptions = {};
   switch (true) {
     case !!options.amend: {
       commitOptions['--amend'] = null;

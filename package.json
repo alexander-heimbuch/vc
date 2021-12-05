@@ -67,7 +67,7 @@
       "publish": false
     },
     "hooks": {
-      "before:init": "npm run lint",
+      "before:init": ["npm run lint", "npm run test"],
       "after:bump": [
         "npm run bundle"
       ]

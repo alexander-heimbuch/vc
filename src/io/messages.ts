@@ -31,7 +31,7 @@ export const FILES_COMMITED = (input: string[]): Result<string> => {
   return Result.ofValue(`No changes commited`);
 };
 
-export const COMMITED = (): Result<string> => Result.ofValue(`${chalk.green('✓')} commited changes`)
+export const COMMITED = (): Result<string> => Result.ofValue(`${chalk.green('✓')} commited changes`);
 
 export const FILE_SELECT = (status: StatusResult, input: string): Result<string> => {
   const { created, modified, deleted, renamed, not_added } = status;

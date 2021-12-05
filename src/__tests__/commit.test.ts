@@ -84,14 +84,14 @@ describe('commit', () => {
   describe('amend', () => {
     beforeEach(async () => {
       await repo.file(testRepo, { path: 'example.md', content: content.example1 });
-      await repo.commit(testRepo, 'existing commit message')
-    })
+      await repo.commit(testRepo, 'existing commit message');
+    });
 
     it('should ask for unstaged changes', async () => {
       await repo.file(testRepo, { path: 'example2.md', content: content.example2 });
       const result = await execute(['commit', '-a']);
       expect(result).toContain('example2.md');
-    })
+    });
 
     it('should use the last commit message as a placeholder', async () => {
       const result = await execute(['commit', '-a'], [cmd.TAB]);

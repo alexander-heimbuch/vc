@@ -19,7 +19,7 @@ export default async function (git: SimpleGit, args: string, options: Options): 
   const branch = await selectBranch('branch', localBranches, { fallback: args });
 
   if (!branch) {
-    return NO_BRANCH_SELECTED()
+    return NO_BRANCH_SELECTED();
   }
 
   if (localBranches.includes(branch)) {

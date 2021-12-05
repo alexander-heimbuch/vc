@@ -60,7 +60,7 @@ describe('branch', () => {
       await repo.branch(testRepo, 'test-local-branch-2');
       await repo.branch(testRepo, 'test-local-branch-3');
       await repo.branch(testRepo, 'test-local-branch-4');
-    })
+    });
 
     it('should list local branches', async () => {
       const result = await execute(['branch'], ['test-local']);
@@ -73,7 +73,7 @@ describe('branch', () => {
     it('should switch to an existing local branch', async () => {
       await execute(['branch'], ['test-local-branch-1', cmd.ENTER]);
       const result = await testRepo.git.status();
-      expect(result.current).toEqual('test-local-branch-1')
+      expect(result.current).toEqual('test-local-branch-1');
     });
 
     it('should accept a new branch name', async () => {
@@ -84,7 +84,7 @@ describe('branch', () => {
     it('should use a provided branch name', async () => {
       await execute(['branch', 'test-local-branch-1']);
       const result = await testRepo.git.status();
-      expect(result.current).toEqual('test-local-branch-1')
+      expect(result.current).toEqual('test-local-branch-1');
     });
   });
 
@@ -119,7 +119,7 @@ describe('branch', () => {
       const result = await testRepo.git.status();
       expect(result.current).toEqual('a-new-branch');
       expect(result.tracking).toEqual('upstream/test-remote-branch-1');
-    })
+    });
 
     it('should allow to skip the remote', async () => {
       await execute(['branch', 'a-new-branch'], [cmd.ENTER]);
