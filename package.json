@@ -1,6 +1,6 @@
 {
   "name": "vc",
-  "version": "0.0.1-beta.5",
+  "version": "0.1.0",
   "description": "A git cli for humans",
   "main": "./dist/src/vc.js",
   "scripts": {
@@ -67,7 +67,10 @@
       "publish": false
     },
     "hooks": {
-      "before:init": ["npm run lint", "npm run test"],
+      "before:init": [
+        "npm run lint",
+        "npm run test"
+      ],
       "after:bump": [
         "npm run bundle"
       ]
