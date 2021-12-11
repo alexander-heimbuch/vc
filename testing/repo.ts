@@ -4,33 +4,40 @@ import gitP, { SimpleGit, StatusResult } from 'simple-git/promise';
 import tmp, { DirectoryResult } from 'tmp-promise';
 import { DefaultLogFields, LogResult } from 'simple-git';
 
-export interface TestEnv { dir: DirectoryResult, git: SimpleGit }
-export interface TestFile { path: string, content: string }
+export interface TestEnv {
+  dir: DirectoryResult;
+  git: SimpleGit;
+}
+export interface TestFile {
+  path: string;
+  content: string;
+}
 
 export async function init(): Promise<TestEnv> {
   const dir = await tmp.dir({ unsafeCleanup: true });
   const git: SimpleGit = gitP(dir.path);
 
   await git.init(['-b', 'main']);
-  await git.addConfig('user.name', 'Integration Test')
-  await git.addConfig('user.mail', 'integration@test')
+  await git.addConfig('receive.denyCurrentBranch', 'ignore');
+  await git.addConfig('user.name', 'Integration Test');
+  await git.addConfig('user.mail', 'integration@test');
 
-  const testEnv = { dir, git }
+  const testEnv = { dir, git };
 
   await file(testEnv, {
     path: 'README.md',
     content: `
       # TEST REPO
-    `
-  })
+    `,
+  });
 
-  await commit(testEnv, 'initial commit')
+  await commit(testEnv, 'initial commit');
 
   return { dir, git };
 }
 
 export async function file(env: TestEnv, file: TestFile): Promise<TestEnv> {
-  const filePath = path.resolve(env.dir.path, file.path)
+  const filePath = path.resolve(env.dir.path, file.path);
   await ensureFile(filePath);
   await writeFile(filePath, file.content);
 
@@ -45,9 +52,9 @@ export async function commit(env: TestEnv, message: string): Promise<TestEnv> {
 }
 
 export async function branch(env: TestEnv, branchName: string): Promise<TestEnv> {
-  const branches = await (await env.git.branch());
+  const branches = await await env.git.branch();
 
-  if (branches.all.some(branch => branch === branchName)) {
+  if (branches.all.some((branch) => branch === branchName)) {
     await env.git.checkout([branchName]);
   } else {
     await env.git.checkout(['-b', branchName]);
@@ -57,19 +64,19 @@ export async function branch(env: TestEnv, branchName: string): Promise<TestEnv>
 }
 
 export async function add(env: TestEnv, files: string | string[]): Promise<TestEnv> {
-  await env.git.add(files)
+  await env.git.add(files);
 
-  return env
+  return env;
 }
 
 export async function history(env: TestEnv): Promise<LogResult<DefaultLogFields>> {
-  return await env.git.log()
+  return await env.git.log();
 }
 
 export async function status(env: TestEnv): Promise<StatusResult> {
-  return await env.git.status()
+  return await env.git.status();
 }
 
 export async function addRemote(env: TestEnv, name: string, remote: TestEnv): Promise<void> {
-  await env.git.addRemote(name, remote.dir.path)
+  await env.git.addRemote(name, remote.dir.path);
 }
